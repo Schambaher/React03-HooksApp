@@ -1,32 +1,31 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useForm } from "../hooks/useForm";
 import { Message } from "./Message";
+
+interface form {
+    username: string;
+    email:string;
+}
 
 export const SimpleForm = () => {
 
-    const [formState, setFormState] = useState({
-        username: 'strider2',
-        email: 'sebastianschambaher@gmail.com'
+    const {formValues, handleInputChange} = useForm<form>({
+        username: 'strider',
+        email: 'Sebastian@gmail.com'
     })
 
-    const {username, email} = formState;
-
-    const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-        setFormState({
-            ...formState,
-            [target.name]: target.value
-        })
-    }
+    const { username, email } = formValues;
 
     useEffect(() => {
     //   console.log('useEffect called');
     }, [])
     
     useEffect(() => {
-        // console.log('FormState cambió!!');
-    }, [formState])
+        //  console.log('FormState cambió!!');
+    }, [formValues])
 
     useEffect(() => {
-        // console.log('email cambió!!');
+        //  console.log('email cambió!!');
     }, [email])
 
     return (
